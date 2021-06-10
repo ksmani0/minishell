@@ -14,7 +14,6 @@ char *get_input()
 		{
 			tmp = ft_strjoin(tmp2, buf);
 			free_buffer(&tmp2);
-			free_buffer(&buf);
 		}
 		else if (ret == -1)
 			return (void *)0;

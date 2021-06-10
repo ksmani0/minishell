@@ -13,6 +13,10 @@
 #ifndef LIBFT_H
 # define LIBFT_H
 
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 4096
+# endif
+
 # include <unistd.h>
 # include <stdlib.h>
 # include <string.h>
@@ -58,6 +62,9 @@ char			*ft_itoa(int n);
 char			*ft_strmapi(const char *s, char (*f)(unsigned int, char));
 char			*ft_substr(const char *s, unsigned int start, size_t len);
 char			*ft_strtrim(const char *s, const char *delset);
+char			*ft_strsub2(char const *s, unsigned int start, size_t len);
+void			free_buffer(char **sbuffer);
+int				get_next_line(int fd, char **line);
 
 typedef struct	s_list
 {

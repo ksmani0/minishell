@@ -1,5 +1,5 @@
 NAME = minishell
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = 
 CC = gcc
 
 LIBFT = libft.a
@@ -9,7 +9,7 @@ LIBFT_FLAGS = -L./$(LIBFT_DIR) -lft
 CFLAGS += -I $(LIBFT_DIR)
 CFLAGS += -I ./inc/
 
-FILES = main \
+FILES = 
 
 SRCS = $(addprefix srcs/, $(addsuffix .c, $(FILES))) 
 
@@ -17,9 +17,9 @@ OBJS = $(SRCS:.c=.o)
 
 all : $(NAME)
 
-$(NAME) : $(OBJS) $(C_OBJS)
+$(NAME) : $(OBJS)
 	$(MAKE) -C ./lib/libft
-	$(CC) $(CFLAGS) -g -o $(NAME) $(SRCS) $(LIBFT_FLAGS)
+	$(CC) $(CFLAGS) -g -o $(NAME) main.c $(SRCS) $(LIBFT_FLAGS)
 	
 clean :
 	$(MAKE) clean -C ./lib/libft

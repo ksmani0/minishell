@@ -49,7 +49,9 @@ FILES = ft_strlen.c \
 		ft_lstdelone.c \
 		ft_lstclear.c \
 		ft_lstiter.c \
-		ft_lstmap.c
+		ft_lstmap.c \
+		gnl.c \
+		gnl_utils.c
 
 OBJS = $(FILES:.c=.o)
 
