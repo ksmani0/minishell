@@ -1,5 +1,5 @@
 NAME = libft.a
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -g
 
 FILES = ft_strlen.c \
 		ft_atoi.c \
@@ -50,6 +50,7 @@ FILES = ft_strlen.c \
 		ft_lstclear.c \
 		ft_lstiter.c \
 		ft_lstmap.c \
+		ft_trim.c \
 		gnl.c \
 		gnl_utils.c
 

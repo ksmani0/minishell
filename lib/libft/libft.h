@@ -63,6 +63,7 @@ char			*ft_strmapi(const char *s, char (*f)(unsigned int, char));
 char			*ft_substr(const char *s, unsigned int start, size_t len);
 char			*ft_strtrim(const char *s, const char *delset);
 char			*ft_strsub2(char const *s, unsigned int start, size_t len);
+char			*ft_trim(char *str, char c);
 void			free_buffer(char **sbuffer);
 int				get_next_line(int fd, char **line);
 

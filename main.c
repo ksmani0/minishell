@@ -3,34 +3,31 @@
 char *get_input()
 {
 	char	*tmp;
-	int		ret;
-	char	buf[1024];
 	char	*tmp2;
+	char	**commands;
+	int		i;
 
 	tmp2 = ft_strdup("");
-	while (ret = read(STDIN, buf, 1024) > 0)
+	get_next_line(STDIN_FILENO, &tmp);
+	commands = ft_split(tmp, ';');
+	while (*commands)
 	{
-		if (ret > 0)
-		{
-			tmp = ft_strjoin(tmp2, buf);
-			free_buffer(&tmp2);
-		}
-		else if (ret == -1)
-			return (void *)0;
-		else if (ret == 0)
-			break;
-		tmp2 = tmp;
+		tmp = ft_trim(*commands, ' ');
+		commands++;
 	}
+
 	return tmp;
 }
 
 int main(int argc, char **argv, char **envp)
 {
-	char *input;
+	char	*input;
+	t_env	*env_list;
 	(void)argc;
 	(void)argv;
 	(void)envp;
 
+	env_list = parse_env(envp);
 	while(true)
 	{
 		input = get_input();
