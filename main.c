@@ -23,11 +23,13 @@ int main(int argc, char **argv, char **envp)
 {
 	char	*input;
 	t_env	*env_list;
+	char	tmp[100] = "echo haha 'haha' $haha ";
 	(void)argc;
 	(void)argv;
 	(void)envp;
 
 	env_list = parse_env(envp);
+	input = ft_replace(tmp, "$haha", "hoho");
 	while(true)
 	{
 		input = get_input();

@@ -66,6 +66,7 @@ char			*ft_strsub2(char const *s, unsigned int start, size_t len);
 char			*ft_trim(char *str, char c);
 void			free_buffer(char **sbuffer);
 int				get_next_line(int fd, char **line);
+char			*ft_replace(char *str, char *src, char *dest);
 
 typedef struct	s_list
 {

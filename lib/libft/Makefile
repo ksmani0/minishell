@@ -51,6 +51,7 @@ FILES = ft_strlen.c \
 		ft_lstiter.c \
 		ft_lstmap.c \
 		ft_trim.c \
+		ft_replace.c \
 		gnl.c \
 		gnl_utils.c
 
