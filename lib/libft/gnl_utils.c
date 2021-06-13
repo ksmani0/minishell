@@ -74,7 +74,7 @@ char		*ft_strsub2(char const *s, unsigned int start, size_t len)
 	return (sub);
 }
 
-size_t		ft_strlen(const char *str)
+size_t		ft_strlen2(const char *str)
 {
 	int i;
 
