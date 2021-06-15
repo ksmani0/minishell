@@ -18,5 +18,12 @@ typedef struct	s_env
 	struct s_env	*next;
 }				t_env;
 
+t_env	*g_env_list;
+
 t_env	*parse_env(char **envp);
+char	*convert_quotes(char *commands);
+bool	valid_env_name(char c, bool start_number);
+int		get_env_len(char *commands);
+char	*get_env_value(char *key);
+int		count_env(char *commands);
 #endif

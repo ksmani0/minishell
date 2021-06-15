@@ -1,5 +1,19 @@
 #include "minishell.h"
 
+char	*get_env_value(char *key)
+{
+	t_env	*tmp;
+
+	tmp = g_env_list;
+	while (tmp)
+	{
+		if(ft_strcmp(key, tmp->key) == 0)
+			return (tmp->value);
+		tmp = tmp->next;
+	}
+	return (void *)0;
+}
+
 t_env	*env_last(t_env *lst)
 {
 	t_env	*tmp;

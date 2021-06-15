@@ -9,7 +9,10 @@ LIBFT_FLAGS = -L./$(LIBFT_DIR) -lft
 CFLAGS += -I $(LIBFT_DIR)
 CFLAGS += -I ./inc/
 
-FILES = parse_env
+FILES = parse_env \
+		convert_quotes \
+		env_util \
+		quotes_util
 
 SRCS = $(addprefix srcs/, $(addsuffix .c, $(FILES))) 
 

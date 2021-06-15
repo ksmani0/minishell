@@ -13,6 +13,7 @@ char *get_input()
 	while (*commands)
 	{
 		tmp = ft_trim(*commands, ' ');
+		*commands = convert_quotes(*commands);
 		commands++;
 	}
 
@@ -23,16 +24,16 @@ int main(int argc, char **argv, char **envp)
 {
 	char	*input;
 	char	*tmp;
-	t_env	*env_list;
-	char	*tmp2 = "echo haha '$haha' $haha ";
+	char	*tmp2 = "$TERM";
 	(void)argc;
 	(void)argv;
 	(void)envp;
 
-	env_list = parse_env(envp);
+	g_env_list = parse_env(envp);
 	tmp = (char *)malloc(50);
 	ft_strlcpy(tmp, tmp2, ft_strlen(tmp2)+1);
 	ft_replace(&tmp, " ", "");
+	int k = count_env(tmp);
 	while(true)
 	{
 		input = get_input();
