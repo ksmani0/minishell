@@ -25,5 +25,7 @@ char	*convert_quotes(char *commands);
 bool	valid_env_name(char c, bool start_number);
 int		get_env_len(char *commands);
 char	*get_env_value(char *key);
-int		count_env(char *commands);
+int		count_env(char **commands);
+int		count_double_quotes(char **commands);
+int		count_one_quotes(char **commands);
 #endif

@@ -13,14 +13,17 @@ int			calc_malloc_count(char *commands)
 		}
 		else if (*commands == '$')
 		{
-			count = count + count_env(commands);
+			count = count + count_env(&commands);
 		}
 		else if (*commands == '\'')
 		{
 			count = count + count_one_quotes(&commands);
 		}
-		commands++;
-		count++;
+		else
+		{
+			commands++;
+			count++;
+		}
 	}
 	return (count);
 }

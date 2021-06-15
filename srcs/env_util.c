@@ -1,15 +1,5 @@
 #include "minishell.h"
 
-int			count_double_quotes(char **commands)
-{
-	return 0;
-}
-
-int			count_one_quotes(char **commands)
-{
-	return 0;
-}
-
 // env_name count -> $haha = 4
 int			get_env_len(char *commands)
 {
