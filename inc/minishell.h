@@ -8,7 +8,7 @@
 typedef struct	s_cmd
 {
 	char	*cmd;
-
+	t_list	*argv_list;
 }				t_cmd;
 
 typedef struct	s_env
@@ -28,4 +28,5 @@ char	*get_env_value(char *key);
 int		count_env(char **commands);
 int		count_double_quotes(char **commands);
 int		count_one_quotes(char **commands);
+void	parse_execute(char **commnads);
 #endif

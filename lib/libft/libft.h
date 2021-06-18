@@ -71,8 +71,6 @@ void			ft_replace(char **str, char *src, char *dest);
 typedef struct	s_list
 {
 	void			*content;
-	double			min_angle;
-	double			max_angle;
 	struct s_list	*next;
 }				t_list;
 

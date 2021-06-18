@@ -12,7 +12,8 @@ CFLAGS += -I ./inc/
 FILES = parse_env \
 		convert_quotes \
 		env_util \
-		quotes_util
+		quotes_util \
+		parse_execute 
 
 SRCS = $(addprefix srcs/, $(addsuffix .c, $(FILES))) 
 

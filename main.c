@@ -1,9 +1,8 @@
 #include "minishell.h"
 
-char *get_input()
+char **get_input()
 {
 	char	*tmp;
-	char	*tmp2;
 	char	**commands;
 	int		i;
 
@@ -13,28 +12,27 @@ char *get_input()
 	while (*commands)
 	{
 		*commands = ft_trim(*commands, ' ');
-		*commands = convert_quotes(*commands);
+		//*commands = convert_quotes(*commands);
 		commands++;
 	}
-	return tmp;
+	return (commands);
 }
 
+//"echo $haha\"$haha\"'haha'";
 int main(int argc, char **argv, char **envp)
 {
-	char	*input;
-	char	*tmp;
-	char	*tmp2 = "echo $haha\"$haha\"'haha'";
+	char	**input;
+
 	(void)argc;
 	(void)argv;
 	(void)envp;
 
 	g_env_list = parse_env(envp);
-	tmp = (char *)malloc(50);
-	ft_strlcpy(tmp, tmp2, ft_strlen(tmp2)+1);
-	ft_replace(&tmp, " ", "");
 	while(true)
 	{
+		write(0, "$", 1);
 		input = get_input();
+		parse_execute(input);
 	}
 	return (0);
 }
