@@ -24,6 +24,7 @@ char **get_input()
 int main(int argc, char **argv, char **envp)
 {
 	char	**input;
+	int		state;
 
 	(void)argc;
 	(void)argv;
@@ -35,7 +36,8 @@ int main(int argc, char **argv, char **envp)
 		write(0, "$", 1);
 		input = get_input();
 		if (*input)
-			parse_execute(input);
+			state = parse_execute(input);
 	}
+
 	return (0);
 }

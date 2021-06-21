@@ -80,14 +80,25 @@ t_cmd	*make_cmd(char *command)
 		if (argv != 0)
 			ft_lstadd_back(&(tmp->argv_list), ft_lstnew((void *)argv));
 	}
+	argv = (char *)malloc(3);
+	argv[0] = '\\';
+	argv[1] = 'n';
+	argv[2] = 0;
+	ft_lstadd_back(&(tmp->argv_list), ft_lstnew((void *)argv));
 	return (tmp);
 }
 
-void	parse_execute(char **commands)
+int		parse_execute(char **commands)
 {
-	t_cmd *cmd;
+	t_cmd	*cmd;
+	t_rd	*r_list;
 	
+	r_list = 0;
 	cmd = make_cmd(*commands);
-	int k = 4;
+	if (check_parse_error(cmd, &r_list) < 0)
+		return (-1);
+	//r_in = make_r_in_list();
+	//r_out = make_r_out_list();
+
 	//execute_cmd(cmd);
 }
