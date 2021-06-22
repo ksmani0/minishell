@@ -1,5 +1,33 @@
 #include "minishell.h"
 
+void	del_free_rd(t_list	*tmp)
+{
+	t_list	*pre_tmp;
+	t_list	*next_tmp;
+	t_list	*tmp2;
+
+	pre_tmp = 0;
+	while (tmp)
+	{
+		if (ft_strcmp((char *)tmp->content, ">") == 0 || ft_strcmp((char *)tmp->content, "<") == 0 || 
+			ft_strcmp((char *)tmp->content,">>") == 0)
+		{
+			tmp2 = tmp->next->next;
+			if (pre_tmp)
+				pre_tmp->next = tmp2;
+			next_tmp = tmp->next;
+			free_rd(tmp);
+			free_rd(next_tmp);
+			tmp = tmp2;
+		}
+		else
+		{
+			pre_tmp = tmp;
+			tmp = tmp->next;
+		}
+	}
+}
+
 bool	check_filename_valid(char *str)
 {
 	char tmp[3];
@@ -64,11 +92,15 @@ bool	make_redirection_list(t_list *tmp, t_rd **r_list)
 
 int		check_parse_error(t_cmd	*cmd, t_rd **r_list)
 {
-	t_list *tmp;
+	t_list	*tmp;
+	t_list	*start;
 	char	*c;
 
 	tmp = cmd->argv_list;
+	start = tmp;
 	if (check_redirect_parse(tmp) == false)
 		return (-1);
 	make_redirection_list(tmp, r_list);
+	start = set_start(tmp);
+	del_free_rd(tmp);
 }

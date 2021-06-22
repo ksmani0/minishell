@@ -43,4 +43,6 @@ int		check_parse_error(t_cmd	*cmd, t_rd **r_list);
 t_rd	*rd_lstlast(t_rd *lst);
 void	rd_lstadd_back(t_rd **lst, t_rd *new);
 t_rd	*rd_lstnew(char *specific, char *filename);
+void	free_rd(t_list *tmp);
+t_list	*set_start(t_list *tmp);
 #endif

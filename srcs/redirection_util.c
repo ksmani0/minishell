@@ -1,5 +1,30 @@
 #include "minishell.h"
 
+t_list	*set_start(t_list *tmp)
+{
+	bool first;
+	
+	first = false;
+	while (tmp)
+	{
+		if (ft_strcmp((char *)tmp->content, ">") == 0 || ft_strcmp((char *)tmp->content, "<") == 0 || 
+			ft_strcmp((char *)tmp->content,">>") == 0)
+		{
+			tmp = tmp->next->next;
+		}
+		else
+			break ;
+	}
+	return (tmp);
+}
+
+void	free_rd(t_list *tmp)
+{
+	if (tmp->content)
+		free(tmp->content);
+	free(tmp);
+}
+
 t_rd	*rd_lstnew(char *specific, char *filename)
 {
 	t_rd	*tmp;
