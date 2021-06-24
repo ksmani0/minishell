@@ -5,10 +5,12 @@ char **get_input()
 	char	*tmp;
 	char	**commands;
 	char	**tmp2;
-	int		i;
+	t_list	*e_tmp;
 
 	tmp = ft_strdup("");
 	get_next_line(STDIN_FILENO, &tmp);
+	if (check_parse_error(tmp) == -1)
+		return (0);
 	commands = ft_split(tmp, ';');
 	tmp2 = commands;
 	while (*commands)
@@ -18,6 +20,11 @@ char **get_input()
 		commands++;
 	}
 	return (tmp2);
+}
+
+void	free_input(char **input)
+{
+
 }
 
 //"echo $haha\"$haha\"'haha'";
@@ -34,10 +41,18 @@ int main(int argc, char **argv, char **envp)
 	while(true)
 	{
 		write(0, "$", 1);
-		input = get_input();
-		if (*input)
-			state = parse_execute(input);
+		if ((input = get_input()) != 0)
+		{
+			while (*input)
+			{
+				state = parse_execute(*input);
+				input++;
+			}
+		}
+		free_input(input);
 	}
-
 	return (0);
 }
+
+
+

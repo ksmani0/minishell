@@ -66,39 +66,36 @@ char	*get_token(char **command)
 	return (ft_strdup(buf));
 }
 
-t_cmd	*make_cmd(char *command)
+t_list	*make_token_list(char *command)
 {
 	char	*argv;
-	t_cmd	*tmp;
+	t_list	*tmp;
 	
-	tmp = (t_cmd *)malloc(sizeof(t_cmd));
-	tmp->cmd = 0;
-	tmp->argv_list = 0;
+	tmp = 0;
 	while (*command)
 	{
 		argv = get_token(&command);
 		if (argv != 0)
-			ft_lstadd_back(&(tmp->argv_list), ft_lstnew((void *)argv));
+			ft_lstadd_back(&(tmp), ft_lstnew((void *)argv));
 	}
 	argv = (char *)malloc(3);
 	argv[0] = '\\';
 	argv[1] = 'n';
 	argv[2] = 0;
-	ft_lstadd_back(&(tmp->argv_list), ft_lstnew((void *)argv));
+	ft_lstadd_back(&(tmp), ft_lstnew((void *)argv));
 	return (tmp);
 }
 
-int		parse_execute(char **commands)
+int		parse_execute(char *commands)
 {
-	t_cmd	*cmd;
-	t_rd	*r_list;
+	t_list	*tokens;
+	char	**command;
 	
-	r_list = 0;
-	cmd = make_cmd(*commands);
-	if (check_parse_error(cmd, &r_list) < 0)
-		return (-1);
-	//r_in = make_r_in_list();
-	//r_out = make_r_out_list();
-
-	//execute_cmd(cmd);
+	command = ft_split(*commands, '|');
+	while (*command)
+	{
+		*command = ft_trim(*command, ' ');
+		tokens = make_token_list(*command);
+		command++;
+	}
 }

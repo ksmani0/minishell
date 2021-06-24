@@ -90,17 +90,24 @@ bool	make_redirection_list(t_list *tmp, t_rd **r_list)
 	return (true);
 }
 
-int		check_parse_error(t_cmd	*cmd, t_rd **r_list)
+int		check_parse_error(char *commands)
 {
 	t_list	*tmp;
 	t_list	*start;
 	char	*c;
 
-	tmp = cmd->argv_list;
+	tmp = make_token_list(commands);
 	start = tmp;
 	if (check_redirect_parse(tmp) == false)
+	{
+		free_list(tmp);
 		return (-1);
-	make_redirection_list(tmp, r_list);
+	}
+	free_list(tmp);
+	return (1);
+	/*
+	make_redirection_list(tmp);
 	start = set_start(tmp);
 	del_free_rd(tmp);
+	*/
 }
