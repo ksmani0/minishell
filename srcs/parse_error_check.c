@@ -105,9 +105,5 @@ int		check_parse_error(char *commands)
 	}
 	free_list(tmp);
 	return (1);
-	/*
-	make_redirection_list(tmp);
-	start = set_start(tmp);
-	del_free_rd(tmp);
-	*/
+	
 }

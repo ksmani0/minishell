@@ -15,7 +15,9 @@ FILES = parse_env \
 		quotes_util \
 		parse_execute \
 		redirection_util \
-		parse_error_check
+		parse_error_check \
+		free_util \
+		execute 
 
 SRCS = $(addprefix srcs/, $(addsuffix .c, $(FILES))) 
 

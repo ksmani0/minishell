@@ -86,16 +86,26 @@ t_list	*make_token_list(char *command)
 	return (tmp);
 }
 
-int		parse_execute(char *commands)
+int		parse_execute(char *command)
 {
 	t_list	*tokens;
-	char	**command;
+	t_list	*start;
+	t_rd	*r_list;
+	char	**tmp_command;
 	
-	command = ft_split(*commands, '|');
-	while (*command)
+	r_list = 0;
+	tmp_command = ft_split(command, '|');
+	while (*tmp_command)
 	{
-		*command = ft_trim(*command, ' ');
-		tokens = make_token_list(*command);
-		command++;
+		*tmp_command = ft_trim(*tmp_command, ' ');
+		tokens = make_token_list(*tmp_command);
+		make_redirection_list(tokens, &r_list);
+		start = set_start(tokens);
+		del_free_rd(tokens);
+		if (*(tmp_command + 1) == 0)
+			execute(r_list, start, 0);
+		else
+			execute(r_list, start, 1);
+		tmp_command++;
 	}
 }

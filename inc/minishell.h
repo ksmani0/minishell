@@ -49,4 +49,8 @@ t_rd	*rd_lstnew(char *specific, char *filename);
 void	free_rd(t_list *tmp);
 t_list	*set_start(t_list *tmp);
 t_list	*make_token_list(char *command);
+void 	free_list(t_list *tmp);
+bool	make_redirection_list(t_list *tmp, t_rd **r_list);
+void	del_free_rd(t_list	*tmp);
+void 	execute(t_rd *r_lsit, t_list *start, int pipe);
 #endif
