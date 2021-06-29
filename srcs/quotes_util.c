@@ -43,19 +43,69 @@ int			count_one_quotes(char **commands)
 	return (count);
 }
 
+void		convert_double_quotes(char **start, char **commands)
+{
+	char	*tmp;
+	char	*env_value;
+
+	tmp = *commands;
+	tmp++;
+	while (*tmp)
+	{
+		if (*tmp == '"')
+			break ;
+		else if (*tmp == '$')
+		{
+			env_value = get_env(&tmp);
+			ft_strlcpy(*start, env_value, ft_strlen(env_value) + 1);
+		}
+		else
+		{
+			**start = *tmp;
+			*start = *start + 1;
+			tmp++;
+		}
+	}
+	*commands = (tmp++);
+	return ;
+}
+
+void		convert_one_quotes(char *start, char **commands)
+{
+	char	*tmp;
+
+	tmp = *commands;
+	tmp++;
+	while (*tmp)
+	{
+		if (*tmp== '\'')
+			break;
+		*start = *tmp;
+		start++;
+		tmp++;
+	}
+	*commands = tmp + 1;
+	return ;
+}
+
 int			count_env(char **commands)
 {
 	int		size;
-	char	*tmp;
+	char	tmp[1000];
+	int		i;
 	char	*tmp2;
 	
+	i = 0;
 	tmp2 = *commands;
 	size = get_env_len(*commands);
-	if(!(tmp = (char *)malloc(size)))
-		return (-1);
 	tmp2++;
-	ft_strlcpy(tmp, tmp2, size);
-	tmp2 = tmp2 + size - 1;
+	while (i < size)
+	{
+		tmp[i] = *tmp2;
+		tmp2++;
+		i++;
+	}
+	tmp[i] = 0;
 	*commands = tmp2;
 	if (get_env_value(tmp) == 0)
 		return (0);

@@ -17,7 +17,9 @@ FILES = parse_env \
 		redirection_util \
 		parse_error_check \
 		free_util \
-		execute 
+		execute \
+		make_cmd \
+		token_util
 
 SRCS = $(addprefix srcs/, $(addsuffix .c, $(FILES))) 
 
