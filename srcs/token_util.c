@@ -51,9 +51,31 @@ void    none_specific(char *buf, char **command)
     i = 0;
     while (**command)
     {
+        if (**command == '$')
+            break ;
         if (**command == ' ' || **command == '\t' || **command == '\n')
 		{
 			*command = *command + 1;
+			break ;
+		}
+        buf[i] = **command;
+        *command = *command + 1;
+        i++;
+    }
+}
+
+void    env(char *buf, char **command)
+{
+    int i;
+
+    i = 0;
+    while (**command)
+    {
+        if (**command == ' ' || **command == '\t' || **command == '\n'
+        || **command == '|' || **command == '>' || **command == '<')
+		{
+            if (**command == ' ' || **command == '\t' || **command == '\n')
+                *command = *command + 1;
 			break ;
 		}
         buf[i] = **command;
@@ -75,6 +97,8 @@ char	*get_token(char **command)
 		find_qt(buf, command, '"');
 	else if (**command == '\'')
 		find_qt(buf, command, '\'');
+    else if (**command == '$')
+        env(buf, command);
 	else
 		none_specific(buf, command);
 	return (ft_strdup(buf));

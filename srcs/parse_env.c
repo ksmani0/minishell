@@ -1,5 +1,18 @@
 #include "minishell.h"
 
+int		my_strcmp(char *a, char *b)
+{
+	int size_a;
+	int size_b;
+
+	size_a = ft_strlen(a);
+	size_b = ft_strlen(b);
+
+	if (size_a != size_b)
+		return (-1);
+	return (ft_strcmp(a, b));
+}
+
 char	*get_env_value(char *key)
 {
 	t_env	*tmp;
@@ -7,7 +20,7 @@ char	*get_env_value(char *key)
 	tmp = g_env_list;
 	while (tmp)
 	{
-		if(ft_strcmp(key, tmp->key) == 0)
+		if(my_strcmp(key, tmp->key) == 0)
 			return (tmp->value);
 		tmp = tmp->next;
 	}

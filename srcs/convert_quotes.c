@@ -73,6 +73,8 @@ char		*convert_quotes(char *commands)
 
 	tmp = (char *)malloc(calc_malloc_count(commands) + 1);
 	tmp[calc_malloc_count(commands)] = 0;
+	if (calc_malloc_count(commands) == 0)
+		return (tmp);
 	tmp2 = tmp;
 	while (*commands)
 	{

@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 #include "libft.h"
-
+/*
 char	*ft_strchr(const char *str, int n)
 {
 	int		i;
@@ -28,4 +28,20 @@ char	*ft_strchr(const char *str, int n)
 	if (str[i] == n)
 		return ((char *)(str + i));
 	return ((char *)0);
+}
+*/
+char		*ft_strchr(const char *str, int n)
+{
+	int i;
+
+	i = 0;
+	if (!str)
+		return (0);
+	while (str[i])
+	{
+		if (str[i] == n)
+			return ((char *)(str + i));
+		i++;
+	}
+	return (0);
 }

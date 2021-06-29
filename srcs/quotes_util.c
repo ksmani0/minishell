@@ -95,7 +95,7 @@ int			count_env(char **commands)
 	int		i;
 	char	*tmp2;
 	
-	i = 0;
+	i = 1;
 	tmp2 = *commands;
 	size = get_env_len(*commands);
 	tmp2++;

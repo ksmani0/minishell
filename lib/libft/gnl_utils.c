@@ -12,6 +12,7 @@
 
 #include "libft.h"
 
+
 char		*ft_strchr(const char *str, int n)
 {
 	int i;
@@ -27,6 +28,7 @@ char		*ft_strchr(const char *str, int n)
 	}
 	return (0);
 }
+
 
 char		*aa2(const char *src)
 {
