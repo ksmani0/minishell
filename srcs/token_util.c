@@ -51,7 +51,8 @@ void    none_specific(char *buf, char **command)
     i = 0;
     while (**command)
     {
-        if (**command == '$')
+        if (**command == '$' || **command == '>' || **command == '<' || **command == '|'
+        || **command == '"' || **command == '\'')
             break ;
         if (**command == ' ' || **command == '\t' || **command == '\n')
 		{
