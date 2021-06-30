@@ -14,6 +14,8 @@ int			count_double_quotes(char **commands)
 			break ;
 		else if (*tmp == '$')
 			count = count + count_env(&tmp);
+		else if (*tmp == '\'')
+			count = count + count_one_quotes(&tmp);
 		else
 		{
 			count++;
@@ -59,6 +61,8 @@ void		convert_double_quotes(char **start, char **commands)
 			env_value = get_env(&tmp);
 			ft_strlcpy(*start, env_value, ft_strlen(env_value) + 1);
 		}
+		else if (*tmp == '\'')
+			convert_one_quotes(start, &tmp);
 		else
 		{
 			**start = *tmp;
@@ -66,11 +70,11 @@ void		convert_double_quotes(char **start, char **commands)
 			tmp++;
 		}
 	}
-	*commands = (tmp++);
+	*commands = (++tmp);
 	return ;
 }
 
-void		convert_one_quotes(char *start, char **commands)
+void		convert_one_quotes(char **start, char **commands)
 {
 	char	*tmp;
 
@@ -80,8 +84,8 @@ void		convert_one_quotes(char *start, char **commands)
 	{
 		if (*tmp== '\'')
 			break;
-		*start = *tmp;
-		start++;
+		**start = *tmp;
+		*start = (*start) + 1;
 		tmp++;
 	}
 	*commands = tmp + 1;

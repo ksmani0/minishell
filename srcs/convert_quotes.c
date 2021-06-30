@@ -86,7 +86,7 @@ char		*convert_quotes(char *commands)
 			ft_strlcpy(tmp, env_value, ft_strlen(env_value) + 1);
 		}
 		else if (*commands == '\'')
-			convert_one_quotes(tmp, &commands);
+			convert_one_quotes(&tmp, &commands);
 		else
 			*tmp++ = *commands++;
 	}

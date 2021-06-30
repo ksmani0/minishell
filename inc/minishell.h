@@ -64,7 +64,7 @@ t_cmd   *make_cmd(char *command, int pipe);
 void 	free_split(char **splits);
 void 	free_cmd(t_cmd	*cmd);
 char	*get_env(char **commands);
-void	convert_one_quotes(char *start, char **commands);
+void	convert_one_quotes(char **start, char **commands);
 void	convert_double_quotes(char **start, char **commands);
 void	cmd_lstiter(t_list *lst);
 void	reset_buf(char *k);

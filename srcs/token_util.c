@@ -51,10 +51,9 @@ void    none_specific(char *buf, char **command)
     i = 0;
     while (**command)
     {
-        if (**command == '$' || **command == '>' || **command == '<' || **command == '|'
-        || **command == ' ' || **command == '"' || **command == '\'')
+        if (**command == '>' || **command == '<' || **command == '|')
             break ;
-        if (**command == '\t' || **command == '\n')
+        if (**command == '\t' || **command == '\n' || **command == ' ')
 		{
 			*command = *command + 1;
 			break ;
@@ -90,14 +89,8 @@ char	*get_token(char **command)
 	char	buf[9000];
 
 	reset_buf(buf);
-    while (**command == '\t')
+    while (**command == ' ' || **command == '\t')
         *command = *command + 1;
-    while (**command == ' ')
-    {
-        buf[0] = ' ';
-        *command = *command + 1;
-        return (ft_strdup(buf));
-    }
 	if (**command == '|' || **command == '<' || **command == '>')
 		pipe_rd(buf, command);
 	else if (**command == '"')
