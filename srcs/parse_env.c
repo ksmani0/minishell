@@ -17,7 +17,7 @@ char	*get_env_value(char *key)
 {
 	t_env	*tmp;
 
-	tmp = g_env_list;
+	tmp = g_data->env_list;
 	while (tmp)
 	{
 		if(my_strcmp(key, tmp->key) == 0)

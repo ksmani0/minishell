@@ -37,7 +37,15 @@ typedef struct	s_env
 	struct s_env	*next;
 }				t_env;
 
-t_env	*g_env_list;
+typedef struct	s_sh_data
+{
+	t_env		*env_list;
+	int			stdin;
+	int			stdout;
+	int			ret;
+}				t_sh_data;
+
+t_sh_data	*g_data;
 
 t_env	*parse_env(char **envp);
 char	*convert_quotes(char *commands);
@@ -69,4 +77,9 @@ void	convert_double_quotes(char **start, char **commands);
 void	cmd_lstiter(t_list *lst);
 void	reset_buf(char *k);
 char	*get_token(char **command);
+int		check_redirection_list(t_rd  *r_list);
+void    set_rd(t_rd *c_list);
+int     check_need_fork(t_cmd   *c_list);
+void    ft_cd(t_cmd *c_list);
+int     check_need_fork(t_cmd   *c_list);
 #endif

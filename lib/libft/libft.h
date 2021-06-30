@@ -70,7 +70,7 @@ void			ft_replace(char **str, char *src, char *dest);
 
 typedef struct	s_list
 {
-	void			*content;
+	char			*content;
 	struct s_list	*next;
 }				t_list;
 
