@@ -2,10 +2,9 @@
 # define MINISHELL_H
 
 # include <stdio.h>
-# include <unistd.h>
-# include <stdlib.h>
 # include <fcntl.h>
 # include <sys/wait.h>
+# include <sys/stat.h>
 # include <errno.h>
 # include "libft.h"
 
@@ -84,7 +83,7 @@ void    set_rd(t_rd *c_list);
 int     check_need_fork(t_cmd   *c_list);
 void    ft_cd(t_cmd *c_list);
 int     check_need_fork(t_cmd   *c_list);
-void    ft_unset(t_list *cmd, t_sh_data *g_data);
+void    ft_unset(t_cmd *cmd, t_sh_data *g_data);
 void	env_add_back(t_env **lst, t_env *new);
 void    ft_export(t_cmd *c_list, t_sh_data *g_data);
 void    delete_env(t_env *env_list, char *argv);
@@ -99,4 +98,6 @@ void    ft_env(t_cmd *c_list, t_sh_data *g_data);
 void    ft_echo(t_cmd *c_list);
 void	child_execute(t_cmd *c_list);
 int		my_strcmp(char *a, char *b);
+int     check_none_fork(t_cmd   *c_list);
+void    etc(t_cmd *c_list);
 #endif

@@ -5,12 +5,25 @@ int     check_need_fork(t_cmd   *c_list)
     char    *tmp;
 
     tmp = c_list->cmd->content;
-    if (ft_strcmp(tmp, "cd") == 0 || ft_strcmp(tmp, "exit") == 0 || 
-    ft_strcmp(tmp, "export") == 0 || ft_strcmp(tmp, "unset") == 0)
+    if (ft_strcmp(tmp, "echo") == 0 || ft_strcmp(tmp, "env") == 0 || 
+    ft_strcmp(tmp, "pwd"))
     {
-        return (-1);
+        return (1);
     }
-    return (1);
+    return (0);
+}
+
+int     check_none_fork(t_cmd   *c_list)
+{
+    char    *tmp;
+
+    tmp = c_list->cmd->content;
+    if (ft_strcmp(tmp, "cd") == 0 || ft_strcmp(tmp, "export") == 0 || 
+    ft_strcmp(tmp, "unset") == 0 || ft_strcmp(tmp, "exit") == 0)
+    {
+        return (1);
+    }
+    return (0);
 }
 
 void    set_rd(t_rd *r_list)

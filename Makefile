@@ -29,7 +29,8 @@ FILES = parse_env \
 		child_execute \
 		ft_echo \
 		ft_pwd \
-		ft_env
+		ft_env \
+		etc
 
 SRCS = $(addprefix srcs/, $(addsuffix .c, $(FILES))) 
 

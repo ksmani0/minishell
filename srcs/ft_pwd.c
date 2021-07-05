@@ -4,6 +4,7 @@ void    ft_pwd(t_cmd *c_list)
 {
     char    *buf;
 
+	set_rd(c_list->r_list);
     buf = getcwd(0, 5000);
 	if (!buf)
 		return ;

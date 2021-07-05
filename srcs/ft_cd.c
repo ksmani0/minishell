@@ -46,6 +46,7 @@ void    ft_cd(t_cmd *c_list)
     char    *cwd;
     char    *tmp;
 
+    set_rd(c_list->r_list);
     size = ft_lstsize(c_list->cmd) - 1;
     if (size == 1)
         chdir(get_env_value("HOME"));

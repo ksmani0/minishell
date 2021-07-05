@@ -27,6 +27,7 @@ void	    ft_exit(t_cmd *c_list, t_sh_data *g_data)
 {
 	int	ret;
 
+	set_rd(c_list->r_list);
 	if ((ft_lstsize(c_list->cmd) - 1) == 1)
 	{
 		printf("exit\n");

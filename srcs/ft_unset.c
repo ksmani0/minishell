@@ -36,7 +36,7 @@ void            delete_env(t_env *env_list, char *argv)
     }
 }
 
-void            ft_unset(t_list *cmd, t_sh_data *g_data)
+void            ft_unset(t_cmd *c_list, t_sh_data *g_data)
 {
     int     size;
     t_list  *tmp;
@@ -45,8 +45,9 @@ void            ft_unset(t_list *cmd, t_sh_data *g_data)
 	tmp2[0] = '\\';
 	tmp2[1] = 'n';
 	tmp2[2] = 0;
-    tmp = cmd;
-    size = ft_lstsize(cmd) - 1;
+    set_rd(c_list->r_list);
+    tmp = c_list->cmd;
+    size = ft_lstsize(tmp) - 1;
     if (size == 0)
         printf("unset: not enough arguments\n");
     else

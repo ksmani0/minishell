@@ -23,7 +23,7 @@ int     none_fork_execute(t_cmd *c_list)
     if (ft_strcmp(tmp, "cd") == 0)
         ft_cd(c_list);
     else if (ft_strcmp(tmp, "unset") == 0)
-        ft_unset(c_list->cmd->next, g_data);
+        ft_unset(c_list, g_data);
     else if (ft_strcmp(tmp, "export") == 0)
         ft_export(c_list, g_data);
     else if (ft_strcmp(tmp, "exit"))
@@ -60,11 +60,9 @@ void    execute(t_cmd *c_list)
         return ;
     set_pipe(c_list);
     if (check_need_fork(c_list) == 1)
-    {
         fork_execute(c_list);
-    }
-    else
-    {
+    else if (check_none_fork(c_list) == 1)
         none_fork_execute(c_list);
-    }
+    else
+        etc(c_list);
 }

@@ -10,7 +10,7 @@ void	pipe_rd(char *buf, char **command)
 	}
 	else if (**command == '>')
 	{
-		if (**(command + 1) == '>')
+		if (*(*command + 1) == '>')
 		{
 			*buf = '>';
 			*(buf + 1) = '>';

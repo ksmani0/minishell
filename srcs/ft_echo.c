@@ -24,6 +24,7 @@ void            ft_echo(t_cmd *c_list)
     int     size;
     t_list  *tmp;
 
+    set_rd(c_list->r_list);
     tmp = c_list->cmd->next;
     size = ft_lstsize(c_list->cmd) - 1;
     flag = 1;
