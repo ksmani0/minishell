@@ -45,13 +45,16 @@ t_env	*env_last(t_env *lst)
 
 void	env_add_back(t_env **lst, t_env *new)
 {
+	t_env	*last;
 	if ((*lst) == NULL)
 	{
 		*lst = new;
 	}
 	else
 	{
-		env_last(*lst)->next = new;
+		last = env_last(*lst);
+		last->next = new;
+		new->prev = last;
 	}
 }
 
@@ -68,6 +71,8 @@ t_env	*parse_env(char **envp)
 		splits = ft_split(*envp, '=');
 		tmp->key = splits[0];
 		tmp->value = splits[1];
+		tmp->prev = 0;
+		tmp->next = 0;
 		env_add_back(&env_list, tmp);
 		envp++;
 	}

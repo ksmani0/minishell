@@ -28,7 +28,7 @@ int		parse_execute(char *command)
 	char	**back_up;
 
 	c_list = 0;
-	tmp_command = ft_split(command, '|');
+	tmp_command = ft_split2(command, '|');
 	back_up = tmp_command;
 	while (*tmp_command)
 	{

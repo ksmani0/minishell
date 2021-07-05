@@ -91,14 +91,12 @@ char	*get_token(char **command)
 	reset_buf(buf);
     while (**command == ' ' || **command == '\t')
         *command = *command + 1;
-	if (**command == '|' || **command == '<' || **command == '>')
-		pipe_rd(buf, command);
-	else if (**command == '"')
+	if (**command == '"')
 		find_qt(buf, command, '"');
 	else if (**command == '\'')
 		find_qt(buf, command, '\'');
-    else if (**command == '$')
-        env(buf, command);
+    else if (**command == '|' || **command == '<' || **command == '>')
+		pipe_rd(buf, command);
 	else
 		none_specific(buf, command);
 	return (ft_strdup(buf));

@@ -105,5 +105,4 @@ int		check_parse_error(char *commands)
 	}
 	free_list(tmp);
 	return (1);
-	
 }

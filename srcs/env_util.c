@@ -1,5 +1,26 @@
 #include "minishell.h"
 
+void		print_and_free(char **env_key_list)
+{
+	char **tmp;
+	char **tmp2;
+
+	tmp = env_key_list;
+	while (*tmp)
+	{
+		printf("%s=\"%s\"\n", *tmp, get_env_value(*tmp));
+		tmp++;
+	}
+	tmp2 = env_key_list;
+	while (*tmp2)
+	{
+		tmp = tmp2 + 1;
+		free(*tmp2);
+		tmp2 = tmp;
+	}
+	free(env_key_list);
+}
+
 // env_name count -> $haha = 4
 int			get_env_len(char *commands)
 {

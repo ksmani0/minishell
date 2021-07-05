@@ -19,7 +19,12 @@ void     change_cwd_path(char *arg)
     cwd = getcwd(0,5000);
     path = join_cwd_arg(cwd, arg);
     if (chdir(path) == -1)
+    {
         printf("cd: no such file or directory: %s\n", arg);
+        g_data->ret = 1;
+    }
+    else
+        g_data->ret = 0;
     free(cwd);
     free(path);
 }
@@ -27,7 +32,12 @@ void     change_cwd_path(char *arg)
 void    change_abs_path(char *path)
 {
     if (chdir(path) == -1)
+    {
         printf("cd: no such file or directory: %s\n", path);
+        g_data->ret = 1;
+    }
+    else
+        g_data->ret = 0;
 }
 
 void    ft_cd(t_cmd *c_list)

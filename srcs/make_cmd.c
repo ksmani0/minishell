@@ -42,6 +42,7 @@ t_cmd   *make_cmd(char *command, int pip)
     tmp = (t_cmd *)malloc(sizeof(t_cmd));
     command = ft_trim(command, ' ');
     tokens = make_token_list(command);
+    tmp->origin = command;
     cmd_lstiter(tokens);
     make_redirection_list(tokens, &r_list);
     start = set_start(tokens);
@@ -52,6 +53,5 @@ t_cmd   *make_cmd(char *command, int pip)
     tmp->next = 0;
     tmp->prev = 0;
     pipe(tmp->fds);
-    free(command);
     return (tmp);
 }

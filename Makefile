@@ -21,7 +21,15 @@ FILES = parse_env \
 		make_cmd \
 		token_util \
 		rd_util \
-		ft_cd
+		ft_cd \
+		ft_unset \
+		ft_export \
+		ft_exit \
+		ft_export2 \
+		child_execute \
+		ft_echo \
+		ft_pwd \
+		ft_env
 
 SRCS = $(addprefix srcs/, $(addsuffix .c, $(FILES))) 
 

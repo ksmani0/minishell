@@ -26,6 +26,7 @@ typedef struct	s_cmd
 	struct s_rd		*r_list;
 	bool			pipe;
 	int				fds[2];
+	char			*origin;
 	struct s_cmd	*next;
 	struct s_cmd	*prev;
 }				t_cmd;
@@ -34,6 +35,7 @@ typedef struct	s_env
 {
 	char			*key;
 	char			*value;
+	struct s_env	*prev;
 	struct s_env	*next;
 }				t_env;
 
@@ -82,4 +84,19 @@ void    set_rd(t_rd *c_list);
 int     check_need_fork(t_cmd   *c_list);
 void    ft_cd(t_cmd *c_list);
 int     check_need_fork(t_cmd   *c_list);
+void    ft_unset(t_list *cmd, t_sh_data *g_data);
+void	env_add_back(t_env **lst, t_env *new);
+void    ft_export(t_cmd *c_list, t_sh_data *g_data);
+void    delete_env(t_env *env_list, char *argv);
+bool	is_same(char *a, char *b);
+void	print_and_free(char **env_key_list);
+void	ft_exit(t_cmd *c_list, t_sh_data *g_data);
+int    	error_print(char *argv, char *value_index);
+void    check_delete_env(t_env * env_list, char *argv);
+void    ft_pwd(t_cmd *c_list);
+t_env   *make_env(char *key, char *value);
+void    ft_env(t_cmd *c_list, t_sh_data *g_data);
+void    ft_echo(t_cmd *c_list);
+void	child_execute(t_cmd *c_list);
+int		my_strcmp(char *a, char *b);
 #endif

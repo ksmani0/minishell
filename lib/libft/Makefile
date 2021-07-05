@@ -54,7 +54,9 @@ FILES = ft_strlen.c \
 		ft_trim.c \
 		ft_replace.c \
 		gnl.c \
-		gnl_utils.c
+		gnl_utils.c \
+		ft_split2.c \
+		haha.c
 
 OBJS = $(FILES:.c=.o)
 

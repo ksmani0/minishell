@@ -22,14 +22,33 @@ int     none_fork_execute(t_cmd *c_list)
     tmp = c_list->cmd->content;
     if (ft_strcmp(tmp, "cd") == 0)
         ft_cd(c_list);
-    /*
-    else if (ft_strcmp(tmp, "unset"))
-        //ft_unset();
-    else if (ft_strcmp(tmp, "export"))
-        //ft_export();
+    else if (ft_strcmp(tmp, "unset") == 0)
+        ft_unset(c_list->cmd->next, g_data);
+    else if (ft_strcmp(tmp, "export") == 0)
+        ft_export(c_list, g_data);
     else if (ft_strcmp(tmp, "exit"))
-        //ft_exit();
-        */
+        ft_exit(c_list, g_data);
+}
+
+void    fork_execute(t_cmd *c_list)
+{
+    pid_t	pid;
+	int		status;
+
+	pid = fork();
+	if (pid < 0)
+		return ;
+	if (pid == 0)
+	{
+		child_execute(c_list);
+		exit(g_data->ret);
+	}
+	else
+	{
+		waitpid(pid, &status, 0);
+		if (WIFEXITED(status))
+			g_data->ret = WEXITSTATUS(status);
+	}
 }
 
 void    execute(t_cmd *c_list)
@@ -42,7 +61,7 @@ void    execute(t_cmd *c_list)
     set_pipe(c_list);
     if (check_need_fork(c_list) == 1)
     {
-        //fork_execute(c_list);
+        fork_execute(c_list);
     }
     else
     {
