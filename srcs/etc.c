@@ -52,6 +52,7 @@ void    execute_etc(t_cmd *c_list, char *buf)
 	else
 	{
 		waitpid(pid, &status, 0);
+        close(c_list->fds[1]);
 		if (WIFEXITED(status))
 			g_data->ret = WEXITSTATUS(status);
 	}

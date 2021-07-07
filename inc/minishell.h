@@ -109,4 +109,5 @@ void    print_error(t_cmd *c_list);
 bool    check_current_folder(t_cmd *c_list);
 bool    check_path_folder(t_cmd *c_list);
 void    set_pipe(t_cmd *c_list);
+char	*get_env2(char **commands, int *j);
 #endif

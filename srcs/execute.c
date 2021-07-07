@@ -2,10 +2,12 @@
 
 void    set_pipe(t_cmd *c_list)
 {
+    dup2(g_data->origin_stdin, 0);
+    dup2(g_data->origin_stdout, 1);
     if (c_list->prev)
-        dup2(c_list->prev->fds[0], g_data->stdin);
+        dup2(c_list->prev->fds[0], 0);
     if (c_list->pipe)
-        dup2(c_list->fds[1], g_data->stdout);
+        dup2(c_list->fds[1], 1);
 }
 
 int     none_fork_execute(t_cmd *c_list)

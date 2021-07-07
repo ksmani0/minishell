@@ -73,7 +73,6 @@ void        input_env(t_env *env_list, char *argv)
     char    *value_index;
     char    *key_index;
     char    *tmp;
-    t_list  *unset;
     
     value_index = ft_strchr(argv, '=');
     if (error_print(argv, value_index) == 1)
@@ -90,7 +89,6 @@ void        input_env(t_env *env_list, char *argv)
         delete_env(env_list, key_index);
         env_add_back(&env_list, make_env(key_index, value_index));
     }
-    free(unset);
 }
 
 void        ft_export(t_cmd *c_list, t_sh_data *g_data)

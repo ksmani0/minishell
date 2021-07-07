@@ -28,7 +28,7 @@ int			get_env_len(char *commands)
 	bool	start_number;
 	int		count;
 
-	count = 1;
+	count = 0;
 	start_number = ft_isdigit(*commands) == 1 ? true : false;
 	tmp = commands;
 	tmp++;

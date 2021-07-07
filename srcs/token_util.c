@@ -28,7 +28,7 @@ void	pipe_rd(char *buf, char **command)
     }
 }
 
-void    find_qt(char *buf, char **command, char c)
+int    find_qt(char *buf, char **command, char c)
 {
     int i;
 
@@ -43,8 +43,9 @@ void    find_qt(char *buf, char **command, char c)
         *command = *command + 1;
         i++;
     }
-    buf[i] = **command;
+    buf[i++] = **command;
     *command = *command + 1;
+    return (i);
 }
 
 void    none_specific(char *buf, char **command)
@@ -54,16 +55,23 @@ void    none_specific(char *buf, char **command)
     i = 0;
     while (**command)
     {
-        if (**command == '>' || **command == '<' || **command == '|')
-            break ;
-        if (**command == '\t' || **command == '\n' || **command == ' ')
-		{
-			*command = *command + 1;
-			break ;
-		}
-        buf[i] = **command;
-        *command = *command + 1;
-        i++;
+        if (**command == '"')
+		    i = i + find_qt(buf + i, command, '"');
+	    else if (**command == '\'')
+		    i = i + find_qt(buf + i, command, '\'');
+        else
+        {
+            if (**command == '>' || **command == '<' || **command == '|')
+                break ;
+            if (**command == '\t' || **command == '\n' || **command == ' ')
+		    {
+    			*command = *command + 1;
+			    break ;
+		    }
+            buf[i] = **command;
+            *command = *command + 1;
+            i++;
+        }
     }
 }
 

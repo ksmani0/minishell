@@ -40,19 +40,22 @@ bool    check_path_folder(t_cmd *c_list)
     char        **paths;
 
     path_value = get_env_value("PATH");
-    paths = ft_split(path_value, ':');
-    while (*paths)
+    if (path_value)
     {
-        i = ft_strlen(*paths);
-        ft_strlcpy(buf, *paths, ft_strlen(*paths) + 1);
-        buf[i] = '/';
-        ft_strlcpy((buf + i + 1), c_list->cmd->content, ft_strlen(c_list->cmd->content) + 1);
-        if (check_executable(buf, c_list) == 0)
+        paths = ft_split(path_value, ':');
+        while (*paths)
         {
-            execute_etc(c_list, buf);
-            return (true);
+            i = ft_strlen(*paths);
+            ft_strlcpy(buf, *paths, ft_strlen(*paths) + 1);
+            buf[i] = '/';
+            ft_strlcpy((buf + i + 1), c_list->cmd->content, ft_strlen(c_list->cmd->content) + 1);
+            if (check_executable(buf, c_list) == 0)
+            {
+                execute_etc(c_list, buf);
+                return (true);
+            }
+            paths++;
         }
-        paths++;
     }
     return (false);
 }
