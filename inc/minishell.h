@@ -41,6 +41,7 @@ typedef struct	s_env
 typedef struct	s_sh_data
 {
 	t_env		*env_list;
+	char		**envp;
 	int			stdin;
 	int			stdout;
 	int			ret;
@@ -100,4 +101,10 @@ void	child_execute(t_cmd *c_list);
 int		my_strcmp(char *a, char *b);
 int     check_none_fork(t_cmd   *c_list);
 void    etc(t_cmd *c_list);
+int     check_executable(char *buf, t_cmd *c_list);
+void    execute_etc(t_cmd *c_list, char *buf);
+void    print_error(t_cmd *c_list);
+bool    check_current_folder(t_cmd *c_list);
+bool    check_path_folder(t_cmd *c_list);
+void    set_pipe(t_cmd *c_list);
 #endif

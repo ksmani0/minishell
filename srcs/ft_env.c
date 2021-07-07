@@ -59,6 +59,7 @@ static void     print_sort_list2(t_env *env_list)
 
 void            ft_env(t_cmd *c_list, t_sh_data *g_data)
 {
+    set_pipe(c_list);
     set_rd(c_list->r_list);
     print_sort_list2(g_data->env_list);
 }

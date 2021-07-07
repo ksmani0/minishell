@@ -2,17 +2,10 @@
 
 void    set_pipe(t_cmd *c_list)
 {
-    dup2(0, g_data->stdin);
-    dup2(1, g_data->stdout);
-    if (c_list->prev == 0 && c_list->pipe)
-        dup2(c_list->fds[1], g_data->stdout);
-    else if (c_list->prev && c_list->pipe == 0)
-        dup2(c_list->prev->fds[1], g_data->stdin);
-    if (c_list->prev && c_list->pipe)
-    {
-        dup2(g_data->stdin, c_list->prev->fds[1]);
-        dup2(g_data->stdout, c_list->fds[1]);
-    }
+    if (c_list->prev)
+        dup2(c_list->prev->fds[1], 0);
+    if (c_list->pipe)
+        dup2(c_list->fds[1], 1);
 }
 
 int     none_fork_execute(t_cmd *c_list)
@@ -58,7 +51,6 @@ void    execute(t_cmd *c_list)
 
     if (check_redirection_list(c_list->r_list) == -1)
         return ;
-    set_pipe(c_list);
     if (check_need_fork(c_list) == 1)
         fork_execute(c_list);
     else if (check_none_fork(c_list) == 1)

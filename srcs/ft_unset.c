@@ -45,6 +45,7 @@ void            ft_unset(t_cmd *c_list, t_sh_data *g_data)
 	tmp2[0] = '\\';
 	tmp2[1] = 'n';
 	tmp2[2] = 0;
+    //set_pipe(c_list);
     set_rd(c_list->r_list);
     tmp = c_list->cmd;
     size = ft_lstsize(tmp) - 1;

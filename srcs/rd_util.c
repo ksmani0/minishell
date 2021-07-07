@@ -6,7 +6,7 @@ int     check_need_fork(t_cmd   *c_list)
 
     tmp = c_list->cmd->content;
     if (ft_strcmp(tmp, "echo") == 0 || ft_strcmp(tmp, "env") == 0 || 
-    ft_strcmp(tmp, "pwd"))
+    ft_strcmp(tmp, "pwd") == 0)
     {
         return (1);
     }

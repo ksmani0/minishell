@@ -97,8 +97,9 @@ void        ft_export(t_cmd *c_list, t_sh_data *g_data)
 {
     int     size;
     t_list  *tmp;
-    char tmp2[3];
+    char    tmp2[3];
 
+    //set_pipe(c_list);
     set_rd(c_list->r_list);
 	tmp2[0] = '\\';
 	tmp2[1] = 'n';

@@ -30,7 +30,8 @@ FILES = parse_env \
 		ft_echo \
 		ft_pwd \
 		ft_env \
-		etc
+		etc \
+		etc_util
 
 SRCS = $(addprefix srcs/, $(addsuffix .c, $(FILES))) 
 
