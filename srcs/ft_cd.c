@@ -46,7 +46,7 @@ void    ft_cd(t_cmd *c_list)
     char    *cwd;
     char    *tmp;
 
-    //set_pipe(c_list);
+    set_pipe(c_list);
     set_rd(c_list->r_list);
     size = ft_lstsize(c_list->cmd);
     if (size == 1)

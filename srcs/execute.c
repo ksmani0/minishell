@@ -64,5 +64,5 @@ void    execute(t_cmd *c_list)
         none_fork_execute(c_list);
     else
         etc(c_list);
-    close_fd_dup(c_list);
+	close_fd_dup(c_list);
 }
