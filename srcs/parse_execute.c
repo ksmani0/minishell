@@ -21,6 +21,7 @@ int		parse_execute(char *command)
 	t_cmd	*c_list;
 	char	**tmp_command;
 	char	**back_up;
+	t_cmd	*c_backup;
 
 	c_list = 0;
 	tmp_command = ft_split2(command, '|');
@@ -33,11 +34,12 @@ int		parse_execute(char *command)
 			cmd_lstadd_back(&c_list, make_cmd(ft_strdup(*tmp_command), 1));
 		tmp_command++;
 	}
+	c_backup = c_list;
 	free_split(back_up);
 	while (c_list)
     {
 		execute(c_list);
         c_list = c_list->next;
     }
-	free_cmd(c_list);
+	free_cmd(c_backup);
 }
