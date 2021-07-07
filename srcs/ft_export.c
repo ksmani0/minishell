@@ -97,20 +97,16 @@ void        ft_export(t_cmd *c_list, t_sh_data *g_data)
 {
     int     size;
     t_list  *tmp;
-    char    tmp2[3];
 
     //set_pipe(c_list);
     set_rd(c_list->r_list);
-	tmp2[0] = '\\';
-	tmp2[1] = 'n';
-	tmp2[2] = 0;
     tmp = c_list->cmd->next;
-    size = ft_lstsize(c_list->cmd) - 1;
+    size = ft_lstsize(c_list->cmd);
     if (size == 1)
         print_sort_list(g_data->env_list);
     else
     {
-        while (tmp && ft_strcmp(tmp->content, tmp2) != 0)
+        while (tmp)
         {
             input_env(g_data->env_list, tmp->content);
             tmp = tmp->next;

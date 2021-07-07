@@ -29,12 +29,12 @@ void	    ft_exit(t_cmd *c_list, t_sh_data *g_data)
 
 	//set_pipe(c_list);
 	set_rd(c_list->r_list);
-	if ((ft_lstsize(c_list->cmd) - 1) == 1)
+	if ((ft_lstsize(c_list->cmd)) == 1)
 	{
 		printf("exit\n");
 		exit(g_data->ret);
 	}
-	else if ((ft_lstsize(c_list->cmd) - 1) == 2)
+	else if ((ft_lstsize(c_list->cmd)) == 2)
 	{
 		if (is_num_str(c_list->cmd->next->content))
 		{

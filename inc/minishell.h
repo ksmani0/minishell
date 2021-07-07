@@ -44,6 +44,8 @@ typedef struct	s_sh_data
 	char		**envp;
 	int			stdin;
 	int			stdout;
+	int			origin_stdin;
+	int			origin_stdout;
 	int			ret;
 }				t_sh_data;
 

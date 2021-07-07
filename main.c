@@ -39,6 +39,8 @@ int main(int argc, char **argv, char **envp)
 	g_data->env_list = parse_env(envp);
 	g_data->stdin = 0;
 	g_data->stdout = 1;
+	g_data->origin_stdin = dup(0);
+	g_data->origin_stdout = dup(1);
 	g_data->envp = envp;
 	while(true)
 	{

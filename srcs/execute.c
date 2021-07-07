@@ -3,9 +3,9 @@
 void    set_pipe(t_cmd *c_list)
 {
     if (c_list->prev)
-        dup2(c_list->prev->fds[1], 0);
+        dup2(c_list->prev->fds[0], g_data->stdin);
     if (c_list->pipe)
-        dup2(c_list->fds[1], 1);
+        dup2(c_list->fds[1], g_data->stdout);
 }
 
 int     none_fork_execute(t_cmd *c_list)
@@ -37,11 +37,18 @@ void    fork_execute(t_cmd *c_list)
 		exit(g_data->ret);
 	}
 	else
-	{
+	{   
 		waitpid(pid, &status, 0);
+        close(c_list->fds[1]);
 		if (WIFEXITED(status))
 			g_data->ret = WEXITSTATUS(status);
 	}
+}
+
+void	close_fd_dup(t_cmd *c_list)
+{
+    dup2(g_data->origin_stdin, g_data->stdin);
+    dup2(g_data->origin_stdout, g_data->stdout);
 }
 
 void    execute(t_cmd *c_list)
@@ -57,4 +64,5 @@ void    execute(t_cmd *c_list)
         none_fork_execute(c_list);
     else
         etc(c_list);
+    close_fd_dup(c_list);
 }

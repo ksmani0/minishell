@@ -40,20 +40,15 @@ void            ft_unset(t_cmd *c_list, t_sh_data *g_data)
 {
     int     size;
     t_list  *tmp;
-    char tmp2[3];
-
-	tmp2[0] = '\\';
-	tmp2[1] = 'n';
-	tmp2[2] = 0;
     //set_pipe(c_list);
     set_rd(c_list->r_list);
     tmp = c_list->cmd;
-    size = ft_lstsize(tmp) - 1;
+    size = ft_lstsize(tmp);
     if (size == 0)
         printf("unset: not enough arguments\n");
     else
     {
-        while (tmp && ft_strcmp(tmp->content, tmp2) != 0)
+        while (tmp)
         {
             delete_env(g_data->env_list, tmp->content);
             tmp = tmp->next;

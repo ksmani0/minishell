@@ -12,11 +12,6 @@ t_list	*make_token_list(char *command)
 		if (argv != 0)
 			ft_lstadd_back(&(tmp), ft_lstnew((void *)argv));
 	}
-	argv = (char *)malloc(3);
-	argv[0] = '\\';
-	argv[1] = 'n';
-	argv[2] = 0;
-	ft_lstadd_back(&(tmp), ft_lstnew((void *)argv));
 	return (tmp);
 }
 

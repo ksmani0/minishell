@@ -2,7 +2,15 @@
 
 void    print_error(t_cmd *c_list)
 {
-    printf("error\n");
+    if (g_data->ret == 126)
+        printf("%s: is a directory\n", c_list->cmd->content);
+    else if (g_data->ret == 127)
+        printf("%s: command not found\n", c_list->cmd->content);
+    else if (g_data->ret == 999)
+    {
+        printf("permission denined: %s\n", c_list->cmd->content);
+        g_data->ret = 126;
+    }
 }
 
 bool    check_current_folder(t_cmd *c_list)

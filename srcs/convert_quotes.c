@@ -30,17 +30,11 @@ int			calc_malloc_count(char *commands)
 	while (*commands)
 	{
 		if (*commands == '"')
-		{
 			count = count + count_double_quotes(&commands);
-		}
 		else if (*commands == '$')
-		{
 			count = count + count_env(&commands);
-		}
 		else if (*commands == '\'')
-		{
 			count = count + count_one_quotes(&commands);
-		}
 		else
 		{
 			commands++;

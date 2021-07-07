@@ -31,6 +31,24 @@ void	cmd_lstadd_back(t_cmd **lst, t_cmd *new)
 	}
 }
 
+void	convert_qeustion(t_list *lst)
+{
+	t_list	*tmp;
+	char	*tmp2;
+
+	tmp = lst;
+	while (tmp)
+	{
+		tmp2 = tmp->content;
+        if (my_strcmp(tmp2, "$?") == 0)
+        {
+            tmp->content = ft_itoa(g_data->ret);
+            free(tmp2);
+        }
+		tmp = tmp->next;
+	}
+}
+
 t_cmd   *make_cmd(char *command, int pip)
 {
     t_cmd   *tmp;
@@ -43,6 +61,7 @@ t_cmd   *make_cmd(char *command, int pip)
     command = ft_trim(command, ' ');
     tokens = make_token_list(command);
     tmp->origin = command;
+    convert_qeustion(tokens);
     cmd_lstiter(tokens);
     make_redirection_list(tokens, &r_list);
     start = set_start(tokens);
