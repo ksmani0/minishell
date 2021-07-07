@@ -7,11 +7,11 @@ static bool	    is_sep(char c, char sep)
 	return (false);
 }
 
-static void     jumpaa(char   **start, char c, int *i)
+static void     jumpaa(char   *start, char c, int *i)
 {
     char    *tmp;
 
-    tmp = (*start) + *i;
+    tmp = (start) + *i;
     tmp++;
     while (tmp)
     {
@@ -20,7 +20,7 @@ static void     jumpaa(char   **start, char c, int *i)
         tmp++;
         *i = *i + 1;
     }
-    *start = tmp;
+	*i = *i + 1;
 }
 
 static int      count_array(char *str, char sep)
@@ -35,7 +35,7 @@ static int      count_array(char *str, char sep)
 	while (str[i])
 	{
         if (str[i] == '"' || str[i] == '\'')
-            jumpaa(&str, str[i], &i);
+            jumpaa(str, str[i], &i);
 		else if (is_sep(str[i], sep))
 			flag = true;
 		else

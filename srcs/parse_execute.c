@@ -36,7 +36,7 @@ int		parse_execute(char *command)
 	}
 	c_backup = c_list;
 	free_split(back_up);
-	while (c_list)
+	while (c_list && my_strcmp(c_list->cmd->content, "") != 0)
     {
 		execute(c_list);
         c_list = c_list->next;

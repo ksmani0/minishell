@@ -2,13 +2,7 @@
 
 void	pipe_rd(char *buf, char **command)
 {
-	if (**command == '|' || **command == '<')
-	{
-		*buf = **command;
-		buf = buf + 1;
-		*command = *command + 1;
-	}
-	else if (**command == '>')
+    if (**command == '>')
 	{
 		if (*(*command + 1) == '>')
 		{
@@ -16,13 +10,22 @@ void	pipe_rd(char *buf, char **command)
 			*(buf + 1) = '>';
 			*command = *command + 2;
 		}
-		else
+	}
+    else if (**command == '<')
+	{
+		if (*(*command + 1) == '<')
 		{
-			*buf = **command;
-			buf = buf + 1;
-			*command = *command + 1;
+			*buf = '<';
+			*(buf + 1) = '<';
+			*command = *command + 2;
 		}
 	}
+    else
+    {
+		*buf = **command;
+		buf = buf + 1;
+		*command = *command + 1;
+    }
 }
 
 void    find_qt(char *buf, char **command, char c)

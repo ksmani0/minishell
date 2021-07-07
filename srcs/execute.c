@@ -19,7 +19,7 @@ int     none_fork_execute(t_cmd *c_list)
         ft_unset(c_list, g_data);
     else if (ft_strcmp(tmp, "export") == 0)
         ft_export(c_list, g_data);
-    else if (ft_strcmp(tmp, "exit"))
+    else if (ft_strcmp(tmp, "exit") == 0)
         ft_exit(c_list, g_data);
 }
 
