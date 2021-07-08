@@ -6,6 +6,11 @@
 # include <sys/wait.h>
 # include <sys/stat.h>
 # include <errno.h>
+# include <readline/history.h>
+# include <readline/readline.h>
+# include <termios.h>
+# include <termcap.h>
+# include <signal.h>
 # include "libft.h"
 
 # define STDIN 0
@@ -41,12 +46,15 @@ typedef struct	s_env
 typedef struct	s_sh_data
 {
 	t_env		*env_list;
+	char		*input;
 	char		**envp;
 	int			stdin;
 	int			stdout;
 	int			origin_stdin;
 	int			origin_stdout;
+	int			signal;
 	int			ret;
+	int			forked;
 }				t_sh_data;
 
 t_sh_data	*g_data;
@@ -110,4 +118,8 @@ bool    check_current_folder(t_cmd *c_list);
 bool    check_path_folder(t_cmd *c_list);
 void    set_pipe(t_cmd *c_list);
 char	*get_env2(char **commands, int *j);
+void	rd_norm_pass(char *buf, char **command);
+void    my_sig_handle(int sig_number);
+void	init_child_term();
+void	init_term();
 #endif

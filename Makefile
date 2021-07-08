@@ -31,7 +31,8 @@ FILES = parse_env \
 		ft_pwd \
 		ft_env \
 		etc \
-		etc_util
+		etc_util \
+		my_signal
 
 SRCS = $(addprefix srcs/, $(addsuffix .c, $(FILES))) 
 
@@ -41,7 +42,7 @@ all : $(NAME)
 
 $(NAME) : $(OBJS)
 	$(MAKE) -C ./lib/libft
-	$(CC) $(CFLAGS) -g -o $(NAME) main.c $(SRCS) $(LIBFT_FLAGS)
+	$(CC) $(CFLAGS) -g -o $(NAME) main.c $(SRCS) $(LIBFT_FLAGS) -lreadline -lncurses
 	
 clean :
 	$(MAKE) clean -C ./lib/libft

@@ -35,6 +35,8 @@ void    fork_execute(t_cmd *c_list)
 		return ;
 	if (pid == 0)
 	{
+        g_data->forked = 1;
+        init_child_term();
 		child_execute(c_list);
 		exit(g_data->ret);
 	}
@@ -42,6 +44,7 @@ void    fork_execute(t_cmd *c_list)
 	{   
 		waitpid(pid, &status, 0);
         close(c_list->fds[1]);
+        init_term();
 		if (WIFEXITED(status))
 			g_data->ret = WEXITSTATUS(status);
 	}

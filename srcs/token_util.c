@@ -10,6 +10,8 @@ void	pipe_rd(char *buf, char **command)
 			*(buf + 1) = '>';
 			*command = *command + 2;
 		}
+        else
+            rd_norm_pass(buf, command);
 	}
     else if (**command == '<')
 	{
@@ -19,13 +21,11 @@ void	pipe_rd(char *buf, char **command)
 			*(buf + 1) = '<';
 			*command = *command + 2;
 		}
+        else
+            rd_norm_pass(buf, command);
 	}
     else
-    {
-		*buf = **command;
-		buf = buf + 1;
-		*command = *command + 1;
-    }
+        rd_norm_pass(buf, command);
 }
 
 int    find_qt(char *buf, char **command, char c)
