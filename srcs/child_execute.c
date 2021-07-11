@@ -1,20 +1,8 @@
 #include "minishell.h"
 
-void	init_child_term()
+void	init_term(struct termios term)
 {
-	struct termios	term;
-	char			*cm;
-	char			*ce;
-
-	tcgetattr(STDIN_FILENO, &term);
-	term.c_lflag &= ICANON;
-	term.c_lflag &= ECHO;
-	term.c_cc[VMIN] = 100;
-	term.c_cc[VTIME] = 0;
 	tcsetattr(STDIN_FILENO, TCSANOW, &term);
-	tgetent(NULL, "xterm");
-	cm = tgetstr("cm", NULL);
-	ce = tgetstr("ce", NULL);
 }
 
 void	rd_norm_pass(char *buf, char **command)

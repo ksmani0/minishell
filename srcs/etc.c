@@ -33,11 +33,11 @@ void    execute_etc(t_cmd *c_list, char *buf)
     char    **argv;
 	pid_t	pid;
 
+    g_data->forked = 1;
+    tcsetattr(STDIN_FILENO, TCSANOW, &g_data->child_term);
 	pid = fork();
 	if (pid == 0)
 	{
-        g_data->forked = 1;
-        init_child_term();
         set_pipe(c_list);
 		set_rd(c_list->r_list);
         argv = make_argv(c_list, buf);
@@ -50,14 +50,15 @@ void    execute_etc(t_cmd *c_list, char *buf)
 			    exit(127);
             free_split(argv);
         }
+        
 	}
 	else
 	{
 		waitpid(pid, &status, 0);
         close(c_list->fds[1]);
-        init_term();
 		if (WIFEXITED(status))
 			g_data->ret = WEXITSTATUS(status);
+        tcsetattr(STDIN_FILENO, TCSANOW, &g_data->main_term);
 	}
 }
 

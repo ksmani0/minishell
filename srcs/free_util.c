@@ -49,6 +49,7 @@ void free_cmd(t_cmd	*cmd)
 {
 	t_cmd *tmp;
 
+	delete_tmp();
 	while (cmd)
 	{
 		tmp = cmd->next;

@@ -45,16 +45,22 @@ typedef struct	s_env
 
 typedef struct	s_sh_data
 {
-	t_env		*env_list;
-	char		*input;
-	char		**envp;
-	int			stdin;
-	int			stdout;
-	int			origin_stdin;
-	int			origin_stdout;
-	int			signal;
-	int			ret;
-	int			forked;
+	t_env			*env_list;
+	char			*input;
+	char			**envp;
+	int				stdin;
+	int				stdout;
+	int				origin_stdin;
+	int				origin_stdout;
+	struct termios 	main_term;
+	struct termios 	child_term;
+	int				signal;
+	int				ret;
+	int				forked;
+	int				herodoc_fd;
+	char			*cl;
+	char			*cm;
+	char			*ce;
 }				t_sh_data;
 
 t_sh_data	*g_data;
@@ -90,7 +96,7 @@ void	cmd_lstiter(t_list *lst);
 void	reset_buf(char *k);
 char	*get_token(char **command);
 int		check_redirection_list(t_rd  *r_list);
-void    set_rd(t_rd *c_list);
+void    set_rd(t_rd *r_list);
 int     check_need_fork(t_cmd   *c_list);
 void    ft_cd(t_cmd *c_list);
 int     check_need_fork(t_cmd   *c_list);
@@ -119,7 +125,10 @@ bool    check_path_folder(t_cmd *c_list);
 void    set_pipe(t_cmd *c_list);
 char	*get_env2(char **commands, int *j);
 void	rd_norm_pass(char *buf, char **command);
-void    my_sig_handle(int sig_number);
-void	init_child_term();
-void	init_term();
+void    main_signal(int sig_number);
+
+void	init_term(struct termios term);
+void    child_signal(int sig_number);
+int     herodoc(char *filename, t_rd *next);
+void    delete_tmp(void);
 #endif

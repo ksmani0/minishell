@@ -17,21 +17,19 @@ void	free_input(char **input)
 
 }
 
-void	init_term()
+void	init_term2()
 {
-	struct termios	term;
-	char			*cm;
-	char			*ce;
-
-	tcgetattr(STDIN_FILENO, &term);
-	term.c_lflag &= ~ICANON;
-	term.c_lflag &= ECHO;
-	term.c_cc[VMIN] = 1;
-	term.c_cc[VTIME] = 0;
-	tcsetattr(STDIN_FILENO, TCSANOW, &term);
-	tgetent(NULL, "xterm");
-	cm = tgetstr("cm", NULL);
-	ce = tgetstr("ce", NULL);
+	tcgetattr(STDIN_FILENO, &g_data->main_term);
+	tcgetattr(STDIN_FILENO, &g_data->child_term);
+	g_data->main_term.c_lflag &= ~ICANON;
+	g_data->main_term.c_lflag &= ECHO;
+	g_data->main_term.c_cc[VMIN] = 1;
+	g_data->main_term.c_cc[VTIME] = 0;
+	tcsetattr(STDIN_FILENO, TCSANOW, &g_data->main_term);
+	tgetent(NULL, "xterm-256color");
+	g_data->cl = tgetstr("cl", NULL);
+	g_data->cm = tgetstr("cm", NULL);
+	g_data->ce = tgetstr("ce", NULL);
 }
 
 t_sh_data	*init_setting(char **envp)
@@ -45,9 +43,9 @@ t_sh_data	*init_setting(char **envp)
 	g_data->envp = envp;
 	g_data->forked = 0;
 	g_data->signal = 0;
-	signal(SIGINT, (void *)my_sig_handle);
-	signal(SIGQUIT, (void *)my_sig_handle);
-	init_term();
+	signal(SIGINT, main_signal);
+	signal(SIGQUIT, main_signal);
+	init_term2();
 }
 
 //"echo $haha\"$haha\"'haha'";
@@ -71,6 +69,3 @@ int main(int argc, char **argv, char **envp)
 	}
 	return (0);
 }
-
-
-

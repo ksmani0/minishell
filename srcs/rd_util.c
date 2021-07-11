@@ -32,6 +32,8 @@ void    set_rd(t_rd *r_list)
 
     while (r_list)
     {
+        dup2(g_data->origin_stdin, g_data->stdin);
+        dup2(g_data->origin_stdout, g_data->stdout);
         if (ft_strcmp(r_list->specific, ">>") == 0)
         {
             fd = open(r_list->filename, O_WRONLY | O_APPEND | O_CREAT, 0644);
@@ -42,6 +44,8 @@ void    set_rd(t_rd *r_list)
             fd = open(r_list->filename, O_WRONLY | O_TRUNC | O_CREAT, 0644);
             dup2(fd, g_data->stdout);
         }
+        else if (ft_strcmp(r_list->specific, "<<") == 0)
+            herodoc(r_list->filename, r_list->next);
         else if (*(r_list->specific) == '<')
         {
             fd = open(r_list->filename, O_RDONLY);
@@ -56,11 +60,16 @@ int    check_redirection_list(t_rd  *r_list)
     int fd;
     while (r_list)
     {
-        if (ft_strcmp(r_list->specific, ">>") == 0)
+        if (my_strcmp(r_list->specific, "<<") == 0)
+        {
+            r_list = r_list->next;
+            continue ;
+        }
+        else if (ft_strcmp(r_list->specific, ">>") == 0)
             fd = open(r_list->filename, O_WRONLY | O_APPEND | O_CREAT, 0644);
         else if (*(r_list->specific) == '>')
             fd = open(r_list->filename, O_WRONLY | O_TRUNC | O_CREAT, 0644);
-        else if (*(r_list->specific) == '<')
+        else if (my_strcmp(r_list->specific, "<") == 0)
             fd = open(r_list->filename, O_RDONLY);
         if (fd == -1)
         {

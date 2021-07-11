@@ -57,8 +57,8 @@ bool	check_redirect_parse(t_list *tmp)
 	while (tmp2)
 	{
 		c = (char *)tmp2->content;
-		if (ft_strcmp(c, ">") == 0 || ft_strcmp(c, "<") == 0 || 
-			ft_strcmp(c,">>") == 0)
+		if (my_strcmp(c, ">") == 0 || my_strcmp(c, "<") == 0 || 
+			my_strcmp(c,">>") == 0)
 		{
 			d = (char *)tmp2->next->content;
 			if (check_filename_valid(d) == false)

@@ -32,7 +32,8 @@ FILES = parse_env \
 		ft_env \
 		etc \
 		etc_util \
-		my_signal
+		my_signal \
+		herodoc
 
 SRCS = $(addprefix srcs/, $(addsuffix .c, $(FILES))) 
 
