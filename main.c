@@ -6,10 +6,14 @@ char 	*get_input()
 	char	**tmp2;
 
 	g_data->input = readline("");
-	if (check_parse_error(g_data->input) == -1)
-		return (0);
-	g_data->input = ft_trim(g_data->input, ' ');
-	return (g_data->input);
+	if (g_data->input)
+	{
+		if (check_parse_error(g_data->input) == -1)
+			return (0);
+		g_data->input = ft_trim(g_data->input, ' ');
+		return (g_data->input);
+	}
+	return (void *)0;
 }
 
 void	free_input(char **input)
@@ -65,6 +69,8 @@ int main(int argc, char **argv, char **envp)
 			if (g_data->input)
 				add_history(g_data->input);
 		}
+		else
+			return (0);
 		free_buffer(&g_data->input);
 	}
 	return (0);
