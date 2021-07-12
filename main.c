@@ -5,7 +5,7 @@ char 	*get_input()
 	char	**commands;
 	char	**tmp2;
 
-	g_data->input = readline("");
+	g_data->input = readline("$ ");
 	if (g_data->input)
 	{
 		if (check_parse_error(g_data->input) == -1)
@@ -30,7 +30,7 @@ void	init_term2()
 	g_data->main_term.c_cc[VMIN] = 1;
 	g_data->main_term.c_cc[VTIME] = 0;
 	tcsetattr(STDIN_FILENO, TCSANOW, &g_data->main_term);
-	tgetent(NULL, "xterm-256color");
+	tgetent(NULL, "xterm");
 	g_data->cl = tgetstr("cl", NULL);
 	g_data->cm = tgetstr("cm", NULL);
 	g_data->ce = tgetstr("ce", NULL);
@@ -62,7 +62,6 @@ int main(int argc, char **argv, char **envp)
 	init_setting(envp);
 	while(true)
 	{
-		write(0, "$", 1);
 		if ((g_data->input = get_input()) != 0)
 		{
 			state = parse_execute(g_data->input);
