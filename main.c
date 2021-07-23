@@ -16,11 +16,6 @@ char 	*get_input()
 	return (void *)0;
 }
 
-void	free_input(char **input)
-{
-
-}
-
 void	init_term2()
 {
 	tcgetattr(STDIN_FILENO, &g_data->main_term);

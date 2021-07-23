@@ -29,28 +29,39 @@ int     check_none_fork(t_cmd   *c_list)
 void    set_rd(t_rd *r_list)
 {
     int     fd;
+	t_rd	*tmp;
 
-    while (r_list)
+	tmp = r_list;
+    while (tmp)
     {
-        if (ft_strcmp(r_list->specific, ">>") == 0)
+        if (ft_strcmp(tmp->specific, ">>") == 0)
         {
-            fd = open(r_list->filename, O_WRONLY | O_APPEND | O_CREAT, 0644);
+            fd = open(tmp->filename, O_WRONLY | O_APPEND | O_CREAT, 0644);
             dup2(fd, g_data->stdout);
         }
-        else if (*(r_list->specific) == '>')
+        else if (*(tmp->specific) == '>')
         {
-            fd = open(r_list->filename, O_WRONLY | O_TRUNC | O_CREAT, 0644);
+            fd = open(tmp->filename, O_WRONLY | O_TRUNC | O_CREAT, 0644);
             dup2(fd, g_data->stdout);
         }
-        else if (ft_strcmp(r_list->specific, "<<") == 0)
+        tmp = tmp->next;
+    }
+	while (r_list)
+	{
+		if (ft_strcmp(r_list->specific, "<<") == 0)
+		{
             herodoc(r_list->filename, r_list->next);
+			fd = open("tmp", O_RDONLY);
+			g_data->herodoc_fd = fd;
+			dup2(fd, g_data->stdin);
+		}
         else if (*(r_list->specific) == '<')
         {
             fd = open(r_list->filename, O_RDONLY);
             dup2(fd, g_data->stdin);
         }
-        r_list = r_list->next;
-    }
+		r_list = r_list->next;
+	}
 }
 
 int    check_redirection_list(t_rd  *r_list)

@@ -26,21 +26,14 @@ void    handle_keycode(char **buf, char c)
 void    fd_write(t_rd *next, char *buf, bool tf, char *filename)
 {
     int     fd;
-
-    if (!next)
-    {
-        fd = open("tmp", O_WRONLY | O_TRUNC | O_CREAT, 0644);
-        if (tf)
-            write(fd, buf, ft_strlen(buf) - ft_strlen(filename));
-        else
-            write(1, "invalid end\n", 12);
-        close(fd);
-        fd = open("tmp", O_RDONLY);
-        g_data->herodoc_fd = fd;
-        dup2(fd, g_data->stdin);
-    }
-    else
-        free_buffer(&buf);
+	
+	fd = open("tmp", O_WRONLY | O_TRUNC | O_CREAT, 0644);
+	if (tf)
+		write(fd, buf, ft_strlen(buf) - ft_strlen(filename));
+	else
+		write(g_data->origin_stdout, "invalid end\n", 12);
+	close(fd);
+    free_buffer(&buf);
 }
 
 int     herodoc(char *filename, t_rd *next)
@@ -52,8 +45,8 @@ int     herodoc(char *filename, t_rd *next)
 
     buf = 0;
     tf = false;
-    write(1, "\n>", 2);
-    while (read(0, &c, 1) > 0)
+    write(g_data->origin_stdout, "\n>", 2);
+    while (read(g_data->origin_stdin, &c, 1) > 0)
     {
         if (ft_strnstr(buf, filename, ft_strlen(buf)) != 0)
         {
@@ -61,7 +54,7 @@ int     herodoc(char *filename, t_rd *next)
             break ;
         }
 		if ((char)c == '\n')
-			write(1, ">", 1);
+			write(g_data->origin_stdout, ">", 1);
 		handle_keycode(&buf, c);
     }
     fd_write(next, buf, tf, filename);

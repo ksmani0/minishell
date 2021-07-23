@@ -10,11 +10,14 @@ void        main_signal(int sig_number)
 {
     if (sig_number == SIGINT )
     {
-        rl_replace_line("", 0);
+		rl_replace_line("", 0);
         if(g_data->forked == 0)
-            write(1, "\n$", 2);
+			write(1, "\n$", 2);
         else
-            write(1, "\n", 1);
+		{
+			g_data->ret = 130;
+			write(1, "\n", 1);
+		}
 		rl_redisplay();
     }
     else if (sig_number == SIGQUIT)
