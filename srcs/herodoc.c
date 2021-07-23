@@ -61,7 +61,7 @@ int     herodoc(char *filename, t_rd *next)
             break ;
         }
 		if ((char)c == '\n')
-			write(1, ">", 2);
+			write(1, ">", 1);
 		handle_keycode(&buf, c);
     }
     fd_write(next, buf, tf, filename);

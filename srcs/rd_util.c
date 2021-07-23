@@ -32,8 +32,6 @@ void    set_rd(t_rd *r_list)
 
     while (r_list)
     {
-        dup2(g_data->origin_stdin, g_data->stdin);
-        dup2(g_data->origin_stdout, g_data->stdout);
         if (ft_strcmp(r_list->specific, ">>") == 0)
         {
             fd = open(r_list->filename, O_WRONLY | O_APPEND | O_CREAT, 0644);

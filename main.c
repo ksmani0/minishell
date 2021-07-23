@@ -5,7 +5,7 @@ char 	*get_input()
 	char	**commands;
 	char	**tmp2;
 
-	g_data->input = readline("$ ");
+	g_data->input = readline("$");
 	if (g_data->input)
 	{
 		if (check_parse_error(g_data->input) == -1)
