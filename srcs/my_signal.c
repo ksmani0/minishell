@@ -23,7 +23,12 @@ void        main_signal(int sig_number)
         if (g_data->forked == 1)
         {
             write(1, "Quit\n", 5);
-            kill(0, SIGKILL);
+			g_data->ret = 131;
         }
+		else
+		{
+			rl_on_new_line();
+			rl_redisplay();
+		}
     }
 }
