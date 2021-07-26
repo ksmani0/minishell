@@ -9,7 +9,10 @@ char 	*get_input()
 	if (g_data->input)
 	{
 		if (check_parse_error(g_data->input) == -1)
+		{
+			g_data->ret = 2;
 			return (0);
+		}
 		g_data->input = ft_trim(g_data->input, ' ');
 		return (g_data->input);
 	}
@@ -64,7 +67,10 @@ int main(int argc, char **argv, char **envp)
 				add_history(g_data->input);
 		}
 		else
-			return (0);
+		{
+			if (g_data->ret != 2)
+				return (0);
+		}
 		free_buffer(&g_data->input);
 	}
 	return (0);

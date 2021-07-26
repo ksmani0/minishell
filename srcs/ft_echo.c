@@ -13,25 +13,27 @@ static  void    print_echo(t_list *tmp, int flag)
         write(1, "\n", 1);
 }
 
-void            ft_echo(t_cmd *c_list)
+int            ft_echo(t_cmd *c_list)
 {
     int     flag;
     int     size;
     t_list  *tmp;
 
+	g_data->ret = 0;
     set_pipe(c_list);
     set_rd(c_list->r_list);
     tmp = c_list->cmd->next;
     size = ft_lstsize(c_list->cmd);
     flag = 1;
     if (size == 1)
-        return ;
+        return (g_data->ret);
     else if ((my_strcmp(tmp->content, "-n") == 0))
     {
         if (size == 2)
-            return ;
+            return (g_data->ret);
         tmp = tmp->next;
         flag = 0;
     }
     print_echo(tmp, flag);
+	return (g_data->ret);
 }

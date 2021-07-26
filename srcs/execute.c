@@ -36,8 +36,7 @@ void    fork_execute(t_cmd *c_list)
 		return ;
 	if (pid == 0)
 	{
-		child_execute(c_list);
-		exit(g_data->ret);
+		exit(child_execute(c_list));
 	}
 	else
 	{   
