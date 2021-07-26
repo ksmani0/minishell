@@ -2,7 +2,7 @@
 
 void	init_term(struct termios term)
 {
-	tcsetattr(STDIN_FILENO, TCSANOW, &term);
+	//tcsetattr(STDIN_FILENO, TCSANOW, &term);
 }
 
 void	rd_norm_pass(char *buf, char **command)

@@ -34,7 +34,7 @@ void    execute_etc(t_cmd *c_list, char *buf)
 	pid_t	pid;
 
     g_data->forked = 1;
-    tcsetattr(STDIN_FILENO, TCSANOW, &g_data->child_term);
+    //tcsetattr(STDIN_FILENO, TCSANOW, &g_data->child_term);
 	pid = fork();
 	if (pid == 0)
 	{
@@ -58,7 +58,7 @@ void    execute_etc(t_cmd *c_list, char *buf)
         close(c_list->fds[1]);
 		if (WIFEXITED(status))
 			g_data->ret = WEXITSTATUS(status);
-        tcsetattr(STDIN_FILENO, TCSANOW, &g_data->main_term);
+        //tcsetattr(STDIN_FILENO, TCSANOW, &g_data->main_term);
 	}
 }
 

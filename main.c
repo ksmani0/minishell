@@ -22,16 +22,16 @@ char 	*get_input()
 void	init_term2()
 {
 	tcgetattr(STDIN_FILENO, &g_data->main_term);
-	tcgetattr(STDIN_FILENO, &g_data->child_term);
+	//tcgetattr(STDIN_FILENO, &g_data->child_term);
 	g_data->main_term.c_lflag &= ~ICANON;
 	g_data->main_term.c_lflag &= ECHO;
-	g_data->main_term.c_cc[VMIN] = 1;
-	g_data->main_term.c_cc[VTIME] = 0;
+	//g_data->main_term.c_cc[VMIN] = 1;
+	//g_data->main_term.c_cc[VTIME] = 0;
 	tcsetattr(STDIN_FILENO, TCSANOW, &g_data->main_term);
-	tgetent(NULL, "xterm");
-	g_data->cl = tgetstr("cl", NULL);
-	g_data->cm = tgetstr("cm", NULL);
-	g_data->ce = tgetstr("ce", NULL);
+	//tgetent(NULL, "xterm");
+	//g_data->cl = tgetstr("cl", NULL);
+	//g_data->cm = tgetstr("cm", NULL);
+	//g_data->ce = tgetstr("ce", NULL);
 }
 
 t_sh_data	*init_setting(char **envp)
