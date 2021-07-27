@@ -25,8 +25,8 @@ void	init_term2()
 	//tcgetattr(STDIN_FILENO, &g_data->child_term);
 	g_data->main_term.c_lflag &= ~ICANON;
 	g_data->main_term.c_lflag &= ECHO;
-	//g_data->main_term.c_cc[VMIN] = 1;
-	//g_data->main_term.c_cc[VTIME] = 0;
+	g_data->main_term.c_cc[VMIN] = 0;
+	g_data->main_term.c_cc[VTIME] = 0;
 	tcsetattr(STDIN_FILENO, TCSANOW, &g_data->main_term);
 	//tgetent(NULL, "xterm");
 	//g_data->cl = tgetstr("cl", NULL);
